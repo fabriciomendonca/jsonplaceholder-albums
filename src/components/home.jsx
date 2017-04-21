@@ -24,16 +24,20 @@ class Home extends Component {
         {this.props.albums.map(album => {
           const photos = album.photos || [];
           return (
-            <a className="list-group-item" key={album.id} onClick={() => this.onClickAlbum(album.id)}>
-              {album.title}
-              {photos.map(photo => {
-                return (
-                  <div key={photo.id}>
-                    <img src={photo.thumbnailUrl} />
-                  </div>
-                );
-              })}
-            </a>
+            <div className="list-group-item" key={album.id}>
+              <a onClick={() => this.onClickAlbum(album.id)}>
+                {album.title}
+              </a>
+              <div className="row">
+                {photos.map(photo => {
+                  return (
+                    <div className="col-xs-6 col-md-3 col-lg-2" key={photo.id}>
+                      <img src={photo.thumbnailUrl} />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           );
         })}
       </div>
