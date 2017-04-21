@@ -1,1 +1,2 @@
 export const FETCH_ALBUMS = 'FETCH_ALBUMS';
+export const FETCH_ALBUM_PHOTOS = 'FETCH_ALBUM_PHOTOS';

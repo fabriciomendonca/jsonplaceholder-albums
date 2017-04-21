@@ -4,24 +4,39 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/albums-actions';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onClickAlbum = this.onClickAlbum.bind(this);
+  }
 
   componentWillMount() {
     this.props.fetchAlbums();
   }
 
-  renderAlbums(album) {
-    return (
-      <li key={album.id}>
-        <h2>{album.title}</h2>
-      </li>
-    );
+  onClickAlbum(id) {
+    this.props.fetchAlbumPhotos(id);
   }
 
   render() {
     return (
-      <ul className="home">
-        {this.props.albums.map(this.renderAlbums)}
-      </ul>
+      <div className="home list-group pt-40">
+        {this.props.albums.map(album => {
+          const photos = album.photos || [];
+          return (
+            <a className="list-group-item" key={album.id} onClick={() => this.onClickAlbum(album.id)}>
+              {album.title}
+              {photos.map(photo => {
+                return (
+                  <div key={photo.id}>
+                    <img src={photo.thumbnailUrl} />
+                  </div>
+                );
+              })}
+            </a>
+          );
+        })}
+      </div>
     );
   }
 }
